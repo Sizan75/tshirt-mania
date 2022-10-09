@@ -12,14 +12,18 @@ const Home = () => {
     const handleBuyNow= tshirt => {
       const exists = cart.find(ts => ts._id === tshirt._id);
       if(exists){
-        toast.error("You already parchhased it !!", { duration: 4000,
+        toast.error("You already parchased it !!", { duration: 4000,
         position: 'top-center'});
     }else{
         const newCart=[...cart, tshirt]
         setCart(newCart);
         toast.success("Thanks for parchhase :)", { duration: 4000,
             position: 'top-center'});
+        }
     }
+        const handleRemove = tshirt => {
+            const remaining = cart.filter(ts => ts._id !== tshirt._id);
+            setCart(remaining)
         }
     return (
         <div className='home-container'>
@@ -34,6 +38,7 @@ const Home = () => {
             <div className='cart-container'>
                 <Cart
                 cart={cart}
+                handleRemove={handleRemove}
                 ></Cart>
             </div>
         </div>
